@@ -27,8 +27,7 @@ declare namespace SystemJSLoader {
      * Represents a module name for System.import that must resolve to either Traceur, Babel or TypeScript.
      * When set to traceur, babel or typescript, loading will be automatically configured as far as possible.
      */
-    type Transpiler = "traceur" | "babel" | "typescript";
-
+    type Transpiler = "plugin-traceur" | "plugin-babel" | "plugin-typescript" | "traceur" | "babel" | "typescript" | boolean;
 
     type ConfigMap = PackageList<string>;
 
@@ -102,6 +101,12 @@ declare namespace SystemJSLoader {
          * Use this option to disable this iteration and copying of the exports.
          */
         esmExports?: boolean;
+        
+        /**
+         * To ignore resources that shouldn't be traced as part of the build.
+         * Use with the SystemJS Builder. (https://github.com/systemjs/builder#ignore-resources)
+         */
+        build?: boolean;
     }
 
     interface PackageConfig {
@@ -318,6 +323,11 @@ declare namespace SystemJSLoader {
 
 }
 
+declare var SystemJS: SystemJSLoader.System;
+
+/**
+ * @deprecated use SystemJS https://github.com/systemjs/systemjs/releases/tag/0.19.10
+ */
 declare var System: SystemJSLoader.System;
 
 declare module "systemjs" {
